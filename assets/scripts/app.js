@@ -216,12 +216,14 @@ function healHandler() {
 
 function printLogHandler() {
   for (let i = 0; i < 3; i++) {
-  console.log("------------------------------");
+    console.log("------------------------------");
   }
   let i = 1;
-  for(const el of battleLog) {
-    console.log(i);
-    console.log(el);
+  for (const el of battleLog) {
+    console.log(`#${i}`);
+    for (const key in el) {
+      console.log(`${key} => ${el[key]}`);
+    }
     i++;
   }
 }
