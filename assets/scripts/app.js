@@ -12,13 +12,26 @@ const LOG_EVENT_MONSTER_ATTACK = "MONSTER_ATTACK";
 const LOG_EVENT_PLAYER_HEAL = "PLAYER_HEAL";
 const LOG_EVENT_GAME_OVER = "GAME_OVER";
 
-const enteredHealth = prompt("enter your and monster's health: ", "100");
-
-let maxHealth = parseInt(enteredHealth);
 let battleLog = [];
+let lastLoggedEntry;
 
-if (isNaN(maxHealth) || maxHealth <= 0) {
+function getMaxHealth() {
+  const enteredHealth = prompt("enter your and monster's health: ", "100");
+  const parsedHealth = parseInt(enteredHealth);
+  if (isNaN(parsedHealth) || parsedHealth <= 0) {
+    throw { massage: "Invalid user input, not a number!" };
+  }
+  return parsedHealth;
+}
+
+let maxHealth;
+
+try {
+  maxHealth = getMaxHealth();
+} catch (error) {
+  console.log(error);
   maxHealth = 100;
+  alert("Oh, you entered whong value. Setting health to 100...");
 }
 
 let currentMonsterHealth = maxHealth;
@@ -218,11 +231,15 @@ function printLogHandler() {
   for (let i = 0; i < 3; i++) {
     console.log("------------------------------");
   }
-  let i = 1;
+  let i = 0;
   for (const el of battleLog) {
-    console.log(`#${i}`);
-    for (const key in el) {
-      console.log(`${key} => ${el[key]}`);
+    if ((!lastLoggedEntry && lastLoggedEntry !== 0) || lastLoggedEntry < i) {
+      console.log(`#${i + 1}`);
+      for (const key in el) {
+        console.log(`${key} => ${el[key]}`);
+      }
+      lastLoggedEntry = i;
+      break;
     }
     i++;
   }
