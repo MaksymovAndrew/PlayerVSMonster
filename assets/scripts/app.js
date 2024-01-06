@@ -1,3 +1,4 @@
+// global variables (hardcoded)
 const ATTACK_VALUE = 10;
 const STRONG_ATTACK_VALUE = 15;
 const ATTACK_VALUE_MONSTER = 20;
@@ -12,9 +13,11 @@ const LOG_EVENT_MONSTER_ATTACK = "MONSTER_ATTACK";
 const LOG_EVENT_PLAYER_HEAL = "PLAYER_HEAL";
 const LOG_EVENT_GAME_OVER = "GAME_OVER";
 
+// logs
 let battleLog = [];
 let lastLoggedEntry;
 
+// function asking for max health
 function getMaxHealth() {
   const enteredHealth = prompt("enter your and monster's health: ", "100");
   const parsedHealth = parseInt(enteredHealth);
@@ -38,8 +41,9 @@ let currentMonsterHealth = maxHealth;
 let currentPlayerHealth = maxHealth;
 let hasBonusLife = true;
 
-adjustHealthBars(maxHealth);
+adjustHealthBars(maxHealth); //function from vendor.js
 
+// function that is creating logs
 function writeToLog(ev, val, monsterHealth, playerHealth) {
   let logEntry = {
     event: ev,
@@ -128,12 +132,14 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
   battleLog.push(logEntry);
 }
 
+// resetting the battle
 function reset() {
   currentMonsterHealth = maxHealth;
   currentPlayerHealth = maxHealth;
   resetGame(maxHealth);
 }
 
+// function for the ending
 function endRound() {
   const initialPlayerHealth = currentPlayerHealth;
   const pDamage = dealPlayerDamage(ATTACK_VALUE_MONSTER);
@@ -182,6 +188,8 @@ function endRound() {
     reset();
   }
 }
+
+// attacking function
 function attackMonster(mode) {
   const maxDamage = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
   const logEvent =
@@ -189,6 +197,7 @@ function attackMonster(mode) {
       ? LOG_EVENT_PLAYER_ATTACK
       : LOG_EVENT_PLAYER_STRONG_ATTACK;
 
+  // THE SAME AS UPPER, BUT USING IF 
   // if (mode === MODE_ATTACK) {
   //   maxDamage = ATTACK_VALUE;
   //   logEvent = LOG_EVENT_PLAYER_ATTACK;
@@ -208,6 +217,8 @@ function attackHandler() {
 function strongAttackHandler() {
   attackMonster(MODE_STRONG_ATTACK);
 }
+
+// healing function
 function healHandler() {
   let healValue;
   if (currentPlayerHealth >= maxHealth - HEAL_PLAYER_VALUE) {
@@ -226,7 +237,7 @@ function healHandler() {
   );
   endRound();
 }
-
+// function that is writing info to logs(console)
 function printLogHandler() {
   for (let i = 0; i < 3; i++) {
     console.log("------------------------------");
@@ -245,6 +256,7 @@ function printLogHandler() {
   }
 }
 
+//buttons
 attackBtn.addEventListener("click", attackHandler);
 strongAttackBtn.addEventListener("click", strongAttackHandler);
 healBtn.addEventListener("click", healHandler);
