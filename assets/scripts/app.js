@@ -189,7 +189,7 @@ function endRound() {
   }
 }
 
-// attacking function
+// attacking functions
 function attackMonster(mode) {
   const maxDamage = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
   const logEvent =
