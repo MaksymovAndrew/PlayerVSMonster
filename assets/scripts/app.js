@@ -218,7 +218,7 @@ function strongAttackHandler() {
   attackMonster(MODE_STRONG_ATTACK);
 }
 
-// healing function
+// heal player function
 function healHandler() {
   let healValue;
   if (currentPlayerHealth >= maxHealth - HEAL_PLAYER_VALUE) {
