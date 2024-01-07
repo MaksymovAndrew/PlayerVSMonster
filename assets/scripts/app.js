@@ -197,7 +197,7 @@ function attackMonster(mode) {
       ? LOG_EVENT_PLAYER_ATTACK
       : LOG_EVENT_PLAYER_STRONG_ATTACK;
 
-  // THE SAME AS UPPER, BUT USING IF 
+  // THE SAME AS UPPER, BUT USING IF
   // if (mode === MODE_ATTACK) {
   //   maxDamage = ATTACK_VALUE;
   //   logEvent = LOG_EVENT_PLAYER_ATTACK;
@@ -256,7 +256,7 @@ function printLogHandler() {
   }
 }
 
-//buttons
+//buttons assigned in vendor.js
 attackBtn.addEventListener("click", attackHandler);
 strongAttackBtn.addEventListener("click", strongAttackHandler);
 healBtn.addEventListener("click", healHandler);
